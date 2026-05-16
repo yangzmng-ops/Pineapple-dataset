@@ -1,0 +1,11 @@
+# Keep large dataset payloads out of Git.
+# Host the cleaned dataset folder on Google Drive or another file host.
+/image/
+/label/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.cache
+.DS_Store
+Thumbs.db

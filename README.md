@@ -1,39 +1,26 @@
 # Pineapple Dataset
 
-A single-class oriented object detection dataset for pineapple localization.
+The [Dataset](https://drive.google.com/file/d/1gy-sYSPqZZ_yMpRZ_ciyWj58GbsVeiwe/view?usp=drive_link) is an oriented object detection dataset designed for precision pineapple harvesting. The dataset was collected in Xuwen, Guangdong, China, using a robotic harvesting platform equipped with a front-mounted camera.
 
-[Paper](https://doi.org/10.1016/j.asoc.2026.115442) | [Download](#download) | [Format](#format) | [Citation](#citation)
+Each pineapple instance is annotated with an oriented quadrilateral bounding box, enabling both fruit localization and orientation estimation for robotic grasping and cutting. The dataset contains real orchard scenes with dense foliage, irregular fruit distribution, leaf occlusion, diverse viewpoints, and varying fruit scales and orientations. These factors make pineapple perception challenging under natural field conditions.
 
-## Download
+## Paper
 
-Google Drive link to be added.
+The accompanying paper is available here:
 
-## Format
-
-```text
-image/
-label/
-```
-
-Each label file matches the image filename:
-
-```text
-image/000001.jpg
-label/000001.txt
-```
-
-Label format:
-
-```text
-0 x1 y1 x2 y2 x3 y3 x4 y4
-```
+[OALDNet: An orientation-aware lightweight detection network for precision pineapple harvesting](https://doi.org/10.1016/j.asoc.2026.115442)
 
 ## Citation
 
+If you use this dataset or find this work helpful in your research, please cite:
+
 ```bibtex
-@article{pineapple_dataset_2026,
-  doi = {10.1016/j.asoc.2026.115442},
-  url = {https://doi.org/10.1016/j.asoc.2026.115442},
-  year = {2026}
+@article{yang2026oaldnet,
+  title={OALDNet: An orientation-aware lightweight detection network for precision pineapple harvesting},
+  author={Yang, Ziming and Shan, Zhe and Hao, Xiaying and Lin, Cong and Xue, Zhong},
+  journal={Applied Soft Computing},
+  pages={115442},
+  year={2026},
+  publisher={Elsevier}
 }
 ```

@@ -47,10 +47,18 @@ function save_(r) {
 }
 function blocked_(email) {return sheet_('Blocks').getDataRange().getValues().slice(1).some(x => PineappleCore.email(x[0])===email && ['REJECTED','REVOKED'].includes(String(x[1]).trim()));}
 function block_(email) {if(!blocked_(email)) sheet_('Blocks').appendRow([email,'REVOKED','Previously granted permission was removed']);}
+function formOwnerCheck_(c,f) {
+  const expected=PineappleCore.email(c.ownerEmail), effective=PineappleCore.email(Session.getEffectiveUser().getEmail());
+  const user=DriveApp.getFileById(c.formId).getOwner(), owner=user && PineappleCore.email(user.getEmail());
+  if(!expected || !effective || !owner || owner!==expected || owner!==effective) throw new Error('Form must be owned by the configured executing account.');
+  // Google can include the owner in getEditors(); only other/unknown identities are unsafe.
+  if(f.getEditors().some(u=>!u || PineappleCore.email(u.getEmail())!==owner)) throw new Error('Form editors must be limited to owner.');
+}
 function schema_(c) {
   const f=FormApp.openById(c.formId), info=api_(formApi_(c.formId));
   if(!info.settings || info.settings.emailCollectionType!=='VERIFIED') throw new Error('Verified Google-account email collection required; fail closed.');
-  if(f.isPublishingSummary() || f.getEditors().length) throw new Error('Form response summary/edit sharing must be private to owner.');
+  if(f.isPublishingSummary()) throw new Error('Form response summary must be disabled.');
+  formOwnerCheck_(c,f);
   privateLog_(c);
   if(f.canEditResponse()) throw new Error('Response edits must be disabled.');
   const expected=Object.values(c.items).sort(), actual=f.getItems().map(i=>String(i.getId())).sort();
@@ -102,17 +110,23 @@ function policyCheck_(c) {
 function configureApprovedTerms() {
   return locked_(() => {
     const c=cfg_();
+    // Persist the safe state before any validation or remote mutation can fail.
+    c.mode='DRY_RUN'; c.policyReady=false; c.notify=false; c.liveSince=0;
+    props_().setProperty('CONFIG',JSON.stringify(c));
+    props_().deleteProperty('ENABLE_CONFIRMATION');
     // Set these Script Properties only after the owner approves the final text.
     c.termsVersion=props_().getProperty('APPROVED_TERMS_VERSION') || '';
     c.termsUrl=props_().getProperty('APPROVED_TERMS_URL') || '';
     c.ownerEmail=props_().getProperty('APPROVED_OWNER_EMAIL') || '';
     const privacy=props_().getProperty('APPROVED_PRIVACY_NOTICE') || '';
     if(!c.termsVersion || !/^https:\/\//.test(c.termsUrl) || !c.ownerEmail || !privacy) throw new Error('Approved terms, owner email and privacy notice missing.');
-    c.mode='DRY_RUN'; c.policyReady=true; c.notify=false; c.liveSince=0;
-    const f=FormApp.openById(c.formId); f.setAcceptingResponses(false);
+    const f=FormApp.openById(c.formId); formOwnerCheck_(c,f);
+    f.setAcceptingResponses(false);
     f.getItems().find(i=>String(i.getId())===c.items.consent).asMultipleChoiceItem().setHelpText(termsText_(c));
     f.setDescription(privacy+'\nAcademic, non-commercial use without redistribution can qualify for automatic access. Other requests require review.');
-    props_().setProperty('CONFIG',JSON.stringify(c)); policyCheck_(c);
+    c.policyReady=true; // Candidate only; never persist ready until every check succeeds.
+    policyCheck_(c);
+    props_().setProperty('CONFIG',JSON.stringify(c));
   });
 }
 function installDryRunTriggers() {

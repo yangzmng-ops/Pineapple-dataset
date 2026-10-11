@@ -2,7 +2,7 @@
 
 ## Scope and status
 
-This is an implementation checklist, not evidence that the application form or automation is live. The selected routing policy is:
+This is the implementation and maintenance checklist. The production workflow was enabled on 2026-10-11; see [Deployment Status](DEPLOYMENT_STATUS.md) for verified configuration and the outstanding first-applicant check. The selected routing policy is:
 
 - Academic research, no commercial use, and no redistribution: eligible for automatic approval after validation.
 - Commercial use, redistribution, other or uncertain use, conflicting responses, or invalid inputs: manual review.
@@ -11,7 +11,7 @@ This workflow does not select a new dataset license. Do not add legal restrictio
 
 See `../INSTALL.md` for implementation-specific Apps Script setup instructions. This checklist defines the launch and verification gates; it does not replace those instructions.
 
-Keep the current public README and existing download entry unchanged until publication is separately authorized. The owner has deferred new-user download verification to the first real application; do not represent that test as completed. Preserve existing file permissions and existing approvals. Do not make the dataset public or enable an anyone-with-link permission.
+The owner authorized production activation and publication of the application entry. The public README now links to the application form, access terms, and privacy notice. The owner has deferred new-user download verification to the first real application; do not represent that test as completed. Preserve existing file permissions and existing approvals. Do not make the dataset public or enable an anyone-with-link permission.
 
 ## Confirm the target and authority
 

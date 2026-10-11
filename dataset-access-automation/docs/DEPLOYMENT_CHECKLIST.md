@@ -7,11 +7,11 @@ This is an implementation checklist, not evidence that the application form or a
 - Academic research, no commercial use, and no redistribution: eligible for automatic approval after validation.
 - Commercial use, redistribution, other or uncertain use, conflicting responses, or invalid inputs: manual review.
 
-This workflow does not select a new dataset license. Do not add legal restrictions, an agreement version, or an acceptance checkbox for nonexistent terms. Any final usage text must be reviewed before launch.
+This workflow does not select a new dataset license. Do not add legal restrictions, an agreement version, or an acceptance checkbox for nonexistent terms. The owner-confirmed access terms and privacy notice are version `2026-10-11-v1`: see [Access Terms](ACCESS_TERMS.md) and [Privacy Notice](PRIVACY_NOTICE.md). Their publication does not establish that the system is live.
 
 See `../INSTALL.md` for implementation-specific Apps Script setup instructions. This checklist defines the launch and verification gates; it does not replace those instructions.
 
-Keep the current public README and existing download entry unchanged until end-to-end verification and publication authorization are complete. Preserve existing file permissions and existing approvals. Do not make the dataset public or enable an anyone-with-link permission.
+Keep the current public README and existing download entry unchanged until publication is separately authorized. The owner has deferred new-user download verification to the first real application; do not represent that test as completed. Preserve existing file permissions and existing approvals. Do not make the dataset public or enable an anyone-with-link permission.
 
 ## Confirm the target and authority
 
@@ -54,7 +54,7 @@ Do not require an institutional email domain. Verify the requested Google identi
 
 ## End-to-end acceptance tests
 
-Use dry runs and controlled test accounts for test writes. Do not send unsolicited test email or grant access to real applicants without the applicable authorization.
+Use dry runs and controlled test accounts for test writes where available. The owner has no separate test account and chose on 2026-10-11 to defer new-user permission and download verification to the first real application. This check remains pending. Verify the first actual applicant's reader permission, access-related notification, and successful download when that application occurs; record the observed results and any limits. Do not submit a fictitious application or claim that owner access proves new-user download access. Do not send unsolicited test email or grant access without the applicable authorization.
 
 - Eligible academic request: accepted, reader permission verified, correct notification status recorded.
 - Commercial request: manual-review state, no automatic grant.
@@ -74,8 +74,8 @@ Use dry runs and controlled test accounts for test writes. Do not send unsolicit
 1. Finish implementation and test in a controlled environment.
 2. Create the form, response destination, and automation through the authorized setup route.
 3. Complete owner-required authorization steps and verify the configured file and execution identity.
-4. Test from the applicant's perspective and verify the resulting permission through a separate read.
-5. Confirm the approved usage text, notification wording, and form URL.
+4. Perform available configuration and safety checks. Track the new-user permission and download check as deferred to the first real application by owner decision; then verify the resulting permission through a separate read and the applicant's actual download outcome.
+5. Use the confirmed `2026-10-11-v1` access terms and privacy notice; verify the notification wording and form URL. Retain application information only for the approved management purposes and handle correction/deletion requests by email. Do not promise an unimplemented fixed-period or automatic deletion schedule.
 6. Publish only the tested README change with the verified URL. Keep paper, citation, and dataset description unchanged.
 7. State exactly what is live and identify any remaining manual setup. A draft PR is not deployment.
 

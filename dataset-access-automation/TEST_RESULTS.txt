@@ -1,0 +1,33 @@
+✔ adapter only targets fixed ZIP, user/reader, no native notification (6.285312ms)
+✔ cross-record prior attempt stops later queued application (1.499355ms)
+✔ adapter dry-run and date cutoff cannot grant or email (2.545099ms)
+✔ adapter leaves non-retryable authorization failure for operator (2.0525ms)
+✔ schema accepts intended form (3.56315ms)
+✔ schema refuses hand-entered or absent email collection (3.516225ms)
+✔ schema refuses changed title/type/required/options/other (7.330772ms)
+✔ lock released even on an exception (1.508624ms)
+✔ eligible only for all three exact declarations (2.216624ms)
+✔ required fields and verified account email (0.262244ms)
+✔ missing/unknown declaration rejected (0.190802ms)
+✔ consent and blocking have priority (0.215352ms)
+✔ dry-run and unapproved terms never mutate (0.525362ms)
+✔ historic/dry-run records never replay on enable (0.276276ms)
+✔ normal grant then email, no duplication (0.49ms)
+✔ existing viewers/editors remain untouched, no retroactive consent (0.335865ms)
+✔ crash after permission request reconciles instead of regrant (0.281952ms)
+✔ permission failure does not send success email (0.619524ms)
+✔ quota exhaustion defers email only (0.286871ms)
+✔ email uncertainty is never automatically retried (0.248428ms)
+✔ crash during sending requires operator (0.176827ms)
+✔ revoked permissions are not restored (0.198569ms)
+✔ manual and operator-needed states never grant (0.164297ms)
+✔ obvious contradictory purpose requires review (0.674744ms)
+✔ uncertain grant absent on retry never re-grants (0.270401ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 153.572054
